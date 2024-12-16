@@ -40,13 +40,14 @@ else:
 async def test_exporter_endpoint(ops_test: OpsTest, mysql_router_charm_series: str) -> None:
     """Test that the exporter endpoint works when related with TLS"""
     # Build and deploy applications
-    mysqlrouter_charm = "mysql-router"
+    mysqlrouter_charm = "ch:mysql-router"
 
     logger.info("Deploying all the applications")
 
     # deploy mysqlrouter with num_units=None since it's a subordinate charm
     # and will be installed with the related consumer application
-    applications = await asyncio.gather(
+    if False:
+        applications = await asyncio.gather(
         ops_test.model.deploy(
             MYSQL_APP_NAME,
             channel="8.0/edge",
@@ -77,6 +78,37 @@ async def test_exporter_endpoint(ops_test: OpsTest, mysql_router_charm_series: s
             series=mysql_router_charm_series,
         ),
     )
+
+    if True:
+        await ops_test.model.deploy(
+            MYSQL_APP_NAME,
+            channel="8.0/edge",
+            application_name=MYSQL_APP_NAME,
+            config={"profile": "testing"},
+            num_units=1,
+        )
+        await ops_test.model.deploy(
+            mysqlrouter_charm,
+            application_name=MYSQL_ROUTER_APP_NAME,
+            num_units=0,
+            series=mysql_router_charm_series,
+        )
+        await ops_test.model.deploy(
+            APPLICATION_APP_NAME,
+            application_name=APPLICATION_APP_NAME,
+            num_units=1,
+            # MySQL Router and Grafana agent are subordinate -
+            # they will use the series of the principal charm
+            series=mysql_router_charm_series,
+            channel="latest/edge",
+        )
+        await ops_test.model.deploy(
+            GRAFANA_AGENT_APP_NAME,
+            application_name=GRAFANA_AGENT_APP_NAME,
+            num_units=0,
+            channel="latest/stable",
+            series=mysql_router_charm_series,
+        )
 
     [mysql_app, mysql_router_app, mysql_test_app, grafana_agent_app] = applications
 

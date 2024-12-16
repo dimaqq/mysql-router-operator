@@ -71,20 +71,20 @@ async def test_exporter_endpoint(ops_test: OpsTest, mysql_router_charm_series: s
         )
 
     if True:
-    await    ops_test.model.deploy(
+        await    ops_test.model.deploy(
             MYSQL_APP_NAME,
             channel="8.0/edge",
             application_name=MYSQL_APP_NAME,
             config={"profile": "testing"},
             num_units=1,
         )
-    await    ops_test.model.deploy(
+        await    ops_test.model.deploy(
             mysqlrouter_charm,
             application_name=MYSQL_ROUTER_APP_NAME,
             num_units=0,
             series=mysql_router_charm_series,
         )
-    await    ops_test.model.deploy(
+        await    ops_test.model.deploy(
             APPLICATION_APP_NAME,
             application_name=APPLICATION_APP_NAME,
             num_units=1,
@@ -93,7 +93,7 @@ async def test_exporter_endpoint(ops_test: OpsTest, mysql_router_charm_series: s
             series=mysql_router_charm_series,
             channel="latest/edge",
         )
-    await    ops_test.model.deploy(
+        await    ops_test.model.deploy(
             GRAFANA_AGENT_APP_NAME,
             application_name=GRAFANA_AGENT_APP_NAME,
             num_units=0,

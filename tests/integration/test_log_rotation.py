@@ -33,7 +33,7 @@ SLOW_TIMEOUT = 15 * 60
 async def test_log_rotation(ops_test: OpsTest, mysql_router_charm_series: str) -> None:
     """Test the log rotation of mysqlrouter logs."""
     # Build and deploy applications
-    mysqlrouter_charm = await ops_test.build_charm(".")
+    mysqlrouter_charm = "mysql-router"
 
     logger.info("Deploying all the applications")
 

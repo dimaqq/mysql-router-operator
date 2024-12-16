@@ -31,7 +31,7 @@ RETRY_TIMEOUT = 3 * 60
 async def test_exporter_endpoint(ops_test: OpsTest, mysql_router_charm_series: str) -> None:
     """Test that exporter endpoint is functional."""
     # Build and deploy applications
-    mysqlrouter_charm = await ops_test.build_charm(".")
+    mysqlrouter_charm = "mysql-router"
 
     logger.info("Deploying all the applications")
 

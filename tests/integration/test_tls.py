@@ -48,7 +48,7 @@ async def test_build_deploy_and_relate(ops_test: OpsTest, mysql_router_charm_ser
         )
 
         # ROUTER
-        mysqlrouter_charm = await ops_test.build_charm(".")
+        mysqlrouter_charm = "mysql-router"
 
         # tls, test app and router
         await asyncio.gather(

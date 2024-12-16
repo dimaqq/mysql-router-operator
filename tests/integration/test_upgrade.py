@@ -94,7 +94,7 @@ async def test_upgrade_from_edge(ops_test: OpsTest, continuous_writes) -> None:
 
     logger.info("Build charm locally")
     global charm
-    charm = await ops_test.build_charm(".")
+    charm = "mysql-router"
     global temporary_charm
     temporary_charm = "./upgrade.charm"
     shutil.copy(charm, temporary_charm)

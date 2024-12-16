@@ -20,7 +20,7 @@ LANDSCAPE_CLIENT_APP_NAME = "landscape-client"
 
 @pytest.mark.group(1)
 async def test_ubuntu_pro(ops_test, mysql_router_charm_series, github_secrets):
-    mysqlrouter_charm = await ops_test.build_charm(".")
+    mysqlrouter_charm = "mysql-router"
     await asyncio.gather(
         ops_test.model.deploy(
             MYSQL_APP_NAME,

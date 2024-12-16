@@ -32,7 +32,7 @@ SLOW_TIMEOUT = 15 * 60
 async def test_database_relation(ops_test: OpsTest, mysql_router_charm_series: str) -> None:
     """Test the database relation."""
     # Build and deploy applications
-    mysqlrouter_charm = await ops_test.build_charm(".")
+    mysqlrouter_charm = "mysql-router"
 
     # deploy mysqlrouter with num_units=None since it's a subordinate charm
     # and will be installed with the related consumer application

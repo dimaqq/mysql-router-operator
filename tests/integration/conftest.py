@@ -23,26 +23,6 @@ def mysql_router_charm_series(pytestconfig) -> str:
     return pytestconfig.option.mysql_router_charm_series
 
 
-@pytest.fixture(scope="module")
-def ops_test(
-    ops_test: pytest_operator.plugin.OpsTest, pytestconfig
-) -> pytest_operator.plugin.OpsTest:
-    _build_charm = ops_test.build_charm
-
-    async def build_charm(charm_path) -> pathlib.Path:
-        if pathlib.Path(charm_path) == pathlib.Path("."):
-            # Building mysql charm
-            return await _build_charm(
-                charm_path,
-                bases_index=pytestconfig.option.mysql_router_charm_bases_index,
-            )
-        else:
-            return await _build_charm(charm_path)
-
-    ops_test.build_charm = build_charm
-    return ops_test
-
-
 @pytest.fixture(autouse=True)
 def juju_has_secrets(mocker: MockerFixture, request):
     """This fixture will force the usage of secrets whenever run on Juju 3.x.

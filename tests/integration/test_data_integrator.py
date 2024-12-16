@@ -50,7 +50,7 @@ async def test_external_connectivity_with_data_integrator(
         data_integrator_config = {"database-name": TEST_DATABASE}
 
         # ROUTER
-        mysqlrouter_charm = await ops_test.build_charm(".")
+        mysqlrouter_charm = "mysql-router"
 
         # tls, data-integrator and router
         await asyncio.gather(

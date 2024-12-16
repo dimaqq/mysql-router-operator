@@ -96,7 +96,7 @@ async def test_external_connectivity_vip_with_hacluster(
     # speed up test by firing update-status more frequently (for hacluster)
     async with ops_test.fast_forward("60s"):
         # mysqlrouter charm
-        mysqlrouter_charm = await ops_test.build_charm(".")
+        mysqlrouter_charm = "mysql-router"
 
         # deploy data-integrator with mysqlrouter
         _, _, data_integrator_application = await asyncio.gather(

@@ -22,12 +22,12 @@ jobs:
           - path_to_test_file: "tests/integration/test_data_integrator.py"
           - path_to_test_file: "tests/integration/test_database.py"
           - path_to_test_file: "tests/integration/test_exporter.py"
-          - path_to_test_file": "tests/integration/test_exporter_with_tls.py"
-          - path_to_test_file": "tests/integration/test_hacluster.py"
-          - path_to_test_file": "tests/integration/test_log_rotation.py"
-          - path_to_test_file": "tests/integration/test_subordinate_charms.py"
-          - path_to_test_file": "tests/integration/test_tls.py"
-          - path_to_test_file": "tests/integration/test_upgrade.py"
+          - path_to_test_file: "tests/integration/test_exporter_with_tls.py"
+          - path_to_test_file: "tests/integration/test_hacluster.py"
+          - path_to_test_file: "tests/integration/test_log_rotation.py"
+          - path_to_test_file: "tests/integration/test_subordinate_charms.py"
+          - path_to_test_file: "tests/integration/test_tls.py"
+          - path_to_test_file: "tests/integration/test_upgrade.py"
         ubuntu-versions:
           # Update whenever charmcraft.yaml is changed
           - series: focal
@@ -41,7 +41,7 @@ jobs:
             ubuntu-versions: {series: focal}
           - groups: {path_to_test_file: tests/integration/test_hacluster.py}
             ubuntu-versions: {series: focal}
-    name: juju ${{ matrix.juju-snap-channel }} series ${{ matrix.ubuntu-versions.series }} file ${{ matrix.groups.path_to_test_file }}
+    name: ${{ matrix.new-wait-for-idle }} ${{ matrix.juju-snap-channel }} ${{ matrix.ubuntu-versions.series }} ${{ matrix.groups.path_to_test_file }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:

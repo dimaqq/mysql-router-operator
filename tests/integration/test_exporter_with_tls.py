@@ -78,6 +78,8 @@ async def test_exporter_endpoint(ops_test: OpsTest, mysql_router_charm_series: s
             series=mysql_router_charm_series,
         ),
     )
+    logging.basicConfig(level="INFO", format="%(symbol)s %(message)s")
+    logging.getLogger("juju.client.connection").setLevel("DEBUG")
 
     if True:
         await ops_test.model.deploy(
